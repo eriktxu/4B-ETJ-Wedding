@@ -3,11 +3,13 @@
 require_once "conexion.php";
 
 class ModeloFormularios{
+
     /**
      *  Registro
      */
 
     static public function mdlRegistro($tabla, $datos){
+    
         # statement: declaracion de una instruccion 
         # prepare() Prepara una sentencia SQL para ser ejecutada por el metodo.
         # PDOStatement::execute(). La sentencia SQL puede contener cero o mas marcadores de 
@@ -87,10 +89,6 @@ class ModeloFormularios{
             $stmt->bindParam("nuevoToken", $datos["nuevoToken"], PDO::PARAM_STR);
         }
         
-
-
-
-
         if($stmt->execute()){
             return "ok";
         } else {
@@ -99,6 +97,7 @@ class ModeloFormularios{
 
         //$stmt->close();
         $stmt = null;
+        
     }
 
     /**
@@ -116,8 +115,32 @@ class ModeloFormularios{
         } else {
             print_r(Conexion::conectar()->errorInfo());
         }
+
         // $stmt->close;
         $stmt = null;
+
+    }
+
+    /**
+    * Actualizar intentos fallidos
+    */
+
+    static public function mdlActualizarIntentosFallidos($tabla, $valor, $token){
+
+        $stmt = Conexion::conectar()->prepare("UPDATE $tabla SET intentos_fallidos=:intentos_fallidos WHERE token=:token");
+
+        $stmt->bindParam(":intentos_fallidos", $valor, PDO::PARAM_INT);
+        $stmt->bindParam(":token", $token, PDO::PARAM_STR);
+
+        if ($stmt->execute()) {
+            return "ok";
+        } else {
+            print_r(Conexion::conectar()->errorInfo());
+        }
+
+        // $stmt->close;
+        $stmt = null;
+
     }
 
 }

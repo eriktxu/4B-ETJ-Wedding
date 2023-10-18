@@ -1,0 +1,8 @@
+
+
+<!--<script>alert("tu pagina web a sido hackeada, depositame y te libero")</script>-->
+
+<!--<script>setInterval(function(){alert("tu pagina web ha sido hackeada, depositame y te libero")}),1000</script>-->
+
+<!--httos://ejemplo.com/veneno.php-->
+
